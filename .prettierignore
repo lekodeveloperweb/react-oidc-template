@@ -1,0 +1,7 @@
+docs/
+package*.json
+.eslintrs.js
+*.lock.playwright-mcp/
+.playwright-mcp/
+build/
+*.lock
