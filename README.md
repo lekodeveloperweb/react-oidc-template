@@ -12,12 +12,50 @@ toast notifications. Light and dark themes are handled by a jotai atom that
 reads the stored preference, falls back to `prefers-color-scheme`, and toggles
 the `dark` class.
 
+Copy the template into a new project with [tiged](https://github.com/tiged/tiged)
+— see [Getting this template with tiged](#getting-this-template-with-tiged).
+
 ## Requirements
 
 - Node.js 20 or newer (this repo was developed on Node 24)
 - Yarn 1.x (`yarn.lock` is committed; `npm install` works too)
 - An OIDC provider you can point at: an authority URL, a client id, and (for
   Keycloak) an audience/client id
+
+## Getting this template with tiged
+
+Use [tiged](https://github.com/tiged/tiged) to copy the template without its git
+history — faster than `git clone --depth 1`, and you won't accidentally keep the
+template's `.git` folder in your new project.
+
+```bash
+npm install -g tiged
+
+# into a new folder named after the repo
+tiged lekodeveloperweb/react-oidc-template
+
+# into the current directory
+tiged lekodeveloperweb/react-oidc-template .
+
+# pin a branch or tag
+tiged lekodeveloperweb/react-oidc-template#dev
+```
+
+`tiged` resolves the repo to the latest commit on the default branch and
+downloads only the tarball, so the copy you get has no remote pointing at the
+template. After copying, re-init git and set your own remote:
+
+```bash
+cd react-oidc-template
+git init
+git add -A
+git commit -m "Initial commit from react-oidc-template"
+```
+
+To copy a subdirectory instead of the whole repo, use `tiged user/repo/subdirectory`.
+For private repos or when you want full git behavior, pass `--mode=git`; to skip
+the local cache (useful if a download is corrupted), pass `--disable-cache`. Run
+`tiged --help` for the rest of the options.
 
 ## Quick start
 
@@ -33,22 +71,22 @@ out of git. `.env.example` is the only env file committed (`.gitignore` ignores
 
 ## Scripts
 
-| Command        | What it does                                |
-| -------------- | ------------------------------------------- |
-| `yarn dev`     | Vite dev server with HMR                    |
+| Command        | What it does                                 |
+| -------------- | -------------------------------------------- |
+| `yarn dev`     | Vite dev server with HMR                     |
 | `yarn build`   | Type-check (`tsc -b`), then production build |
-| `yarn lint`    | ESLint over the whole project               |
-| `yarn preview` | Serve the built app locally                 |
+| `yarn lint`    | ESLint over the whole project                |
+| `yarn preview` | Serve the built app locally                  |
 
 ## Environment variables
 
-| Variable                 | Purpose                                                          |
-| ------------------------ | ---------------------------------------------------------------- |
-| `VITE_OIDC_AUTHORITY`    | OIDC provider base URL, e.g. `https://auth.example.com/realms/myrealm` |
-| `VITE_OIDC_CLIENT_ID`    | Client id registered at the provider                             |
-| `VITE_OIDC_AUDIENCE`     | Audience claim (Keycloak client id); sent with the token request  |
-| `VITE_APP_PATH_PREFIX`   | Router basename; use `/` unless the app is served under a subpath |
-| `VITE_API_URL`           | Backend API base URL. Reserved for app code; nothing in the template reads it yet |
+| Variable               | Purpose                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| `VITE_OIDC_AUTHORITY`  | OIDC provider base URL, e.g. `https://auth.example.com/realms/myrealm`            |
+| `VITE_OIDC_CLIENT_ID`  | Client id registered at the provider                                              |
+| `VITE_OIDC_AUDIENCE`   | Audience claim (Keycloak client id); sent with the token request                  |
+| `VITE_APP_PATH_PREFIX` | Router basename; use `/` unless the app is served under a subpath                 |
+| `VITE_API_URL`         | Backend API base URL. Reserved for app code; nothing in the template reads it yet |
 
 `src/settings/oidc-config.ts` throws at startup if `VITE_OIDC_AUTHORITY`,
 `VITE_OIDC_CLIENT_ID`, or `VITE_OIDC_AUDIENCE` is missing, so a misconfigured
@@ -146,6 +184,7 @@ imports like `@/components/ui/card` work in the editor and at build time.
 
 - [react-oidc-context](https://github.com/butsippadnand/react-oidc-context)
 - [oidc-client-ts](https://github.com/autark-inc/oidc-client-ts)
+- [tiged](https://github.com/tiged/tiged) — scaffolding tool used above
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Vite](https://vite.dev/) · [Tailwind CSS v4](https://tailwindcss.com/docs)
 - [jotai](https://jotai.org/)
