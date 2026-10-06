@@ -233,3 +233,4 @@ tags
 .env*
 !.env.example
 .agents/skills/
+src/generated/
