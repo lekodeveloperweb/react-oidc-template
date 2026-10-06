@@ -13,7 +13,8 @@
     "format:fix": "prettier -w ./src/**/**/*.{ts,tsx} --ignore-path ./.prettierignore",
     "check": "npm run lint && npm run format && npm test",
     "check-limits": "node scripts/check-limits.js src/",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "husky"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
